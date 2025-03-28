@@ -34,25 +34,43 @@ public class Game
 
         while (true)
         {
-            int newX = playerX, newY = playerY;
+            int oldX = playerX, oldY = playerY;
 
             switch (direction)
             {
                 case 'U':
-                    newY--;
+                    if (playerX > 0 && map[playerY - 1, playerX] != '#')
+                    {
+                        playerY--;
+                    }
                     break;
+
                 case 'D':
-                    newY++;
+                    if (playerX < mapWidth - 1 && map[playerY + 1, playerX] != '#')
+                    {
+                        playerY++;
+                    }
                     break;
+
                 case 'L':
-                    newX--;
+                    if (playerX > 0 && map[playerY, playerX - 1] != '#')
+                    {
+                        playerX--;
+                    }
                     break;
+
                 case 'R':
-                    newX++;
+                    if (playerX < mapHeight - 1 && map[playerY, playerX + 1] != '#')
+                    {
+                        playerX++;
+                    }
                     break;
-                default:
-                    continue;
-            } 
+            }
+            Console.SetCursorPosition(oldX, oldY);
+            Console.Write(map[oldY, oldX]);
+            
+            Console.SetCursorPosition(playerX, playerY);
+            Console.Write('@');
         }
     }
 
