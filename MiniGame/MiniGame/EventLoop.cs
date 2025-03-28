@@ -6,7 +6,7 @@ public class EventLoop
 
     public EventLoop(Game game)
     {
-        game = game;
+        this.game = game;
     }
 
     public void Run()
