@@ -21,7 +21,7 @@ public class Game
     private static char[,] map;
     private static int playerX, playerY;
     private static int mapWidth, mapHeight;
-    static void RunGame(char direction)
+    public static void RunGame(char direction)
     {
         Console.Clear();
         
