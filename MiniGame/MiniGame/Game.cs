@@ -2,12 +2,15 @@ namespace MiniGame;
 
 public class Game
 {
+    private static char[,] map;
+    private static int playerX, playerY;
+    private static int mapWidth, mapHeight;
       /// <summary>
       /// Read.
       /// </summary>
       /// <param name="filename">Name of file.</param>
       /// <returns>Array element of maze.</returns>
-      public char[][] Read(string filename)
+    public char[][] Read(string filename)
       {
             string[] line = File.ReadAllLines(filename);
             char[][] maze = new char[line.Length][];
@@ -18,13 +21,11 @@ public class Game
 
             return maze;
       }
-    private static char[,] map;
-    private static int playerX, playerY;
-    private static int mapWidth, mapHeight;
+
     public static void RunGame(char direction)
     {
         Console.Clear();
-        
+
         while (true)
         {
             int newX = playerX, newY = playerY;
@@ -46,9 +47,7 @@ public class Game
                     break;
                 default:
                     continue;
-            }
-            
-            //вызов делегата для обработки движения 
+            } 
         }
     }
 
@@ -67,7 +66,7 @@ public class Game
 
                 playerX = 1;
                 playerY = 1;
-                
+
                 return;
             }
         }
