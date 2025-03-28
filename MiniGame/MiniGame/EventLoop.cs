@@ -14,7 +14,7 @@ public class EventLoop
         while (true)
         {
             var key = Console.ReadKey();
-            switch (key)
+            switch (key.Key)
             {
                 case ConsoleKey.LeftArrow:
                     game.RunGame('L');
