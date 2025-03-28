@@ -5,48 +5,30 @@ public class Game
     private static char[,] map;
     private static int playerX, playerY;
     private static int mapWidth, mapHeight;
-
-    public Game(string filePath)
-    {
-        this.ReadMap(filePath);
+    
+    public Game(string filePath) {
+        ReadMap(filePath);
+        FindPlayerPosition();
     }
-
-    /// <summary>
-    /// Read.
-    /// </summary>
-    /// <param name="filename">Name of file.</param>
-    public void ReadMap(string filename)
-    {
-        string[] lines = File.ReadAllLines(filename);
-        mapWidth = lines.Length;
-        mapHeight = lines[0].Length;
-        map = new char[mapWidth, mapHeight];
-        for (int i = 0; i < mapWidth; i++)
-        {
-            for (int j = 0; j < mapHeight; j++)
+    
+      /// <summary>
+      /// Read.
+      /// </summary>
+      /// <param name="filename">Name of file.</param>
+      /// <returns>Array element of maze.</returns>
+    public char[][] ReadMap(string filename)
+      {
+            string[] line = File.ReadAllLines(filename);
+            char[][] maze = new char[line.Length][];
+            for (int i = 0; i < line.Length; ++i)
             {
-                map[i, j] = lines[i][j];
+                  maze[i] = line[i].ToCharArray();
             }
-        }
-    }
 
-    private void InitializePlayer()
-    {
-        playerX = 1;
-        playerY = 1;
+            return maze;
+      }
 
-        while (map[playerY, playerX] == '#')
-        {
-            playerX++;
-            if (playerX >= mapHeight)
-            {
-                playerX = 1;
-                playerY++;
-            }
-        }
-    }
-
-    public static void RunGame(char direction)
+    public void RunGame(char direction)
     {
         Console.Clear();
 
@@ -54,8 +36,7 @@ public class Game
         {
             int newX = playerX, newY = playerY;
 
-            char key = Console.ReadKey().KeyChar;
-            switch (key)
+            switch (direction)
             {
                 case 'U':
                     newY--;
@@ -71,7 +52,7 @@ public class Game
                     break;
                 default:
                     continue;
-            }
+            } 
         }
     }
 
