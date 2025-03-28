@@ -1,3 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using MiniGame;
 
-Console.WriteLine("Hello, World!");
+string filePath = "file.txt";
+Game game = new Game(filePath);
+EventLoop eventLoop = new EventLoop(game);

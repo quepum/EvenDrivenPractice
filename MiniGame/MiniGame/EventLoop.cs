@@ -17,16 +17,16 @@ public class EventLoop
             switch (key.Key)
             {
                 case ConsoleKey.LeftArrow:
-                    game.RunGame('L');
+                    this.game.RunGame('L');
                     break;
                 case ConsoleKey.RightArrow:
-                    game.RunGame('R');
+                    this.game.RunGame('R');
                     break;
                 case ConsoleKey.UpArrow:
-                    game.RunGame('U');
+                    this.game.RunGame('U');
                     break;
                 case ConsoleKey.DownArrow:
-                    game.RunGame('D');
+                    this.game.RunGame('D');
                     break;
                 case ConsoleKey.Escape:
                     return;

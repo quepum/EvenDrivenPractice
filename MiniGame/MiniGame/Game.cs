@@ -5,22 +5,46 @@ public class Game
     private static char[,] map;
     private static int playerX, playerY;
     private static int mapWidth, mapHeight;
-      /// <summary>
-      /// Read.
-      /// </summary>
-      /// <param name="filename">Name of file.</param>
-      /// <returns>Array element of maze.</returns>
-    public char[][] Read(string filename)
-      {
-            string[] line = File.ReadAllLines(filename);
-            char[][] maze = new char[line.Length][];
-            for (int i = 0; i < line.Length; ++i)
-            {
-                  maze[i] = line[i].ToCharArray();
-            }
 
-            return maze;
-      }
+    public Game(string filePath)
+    {
+        this.ReadMap(filePath);
+    }
+
+    /// <summary>
+    /// Read.
+    /// </summary>
+    /// <param name="filename">Name of file.</param>
+    public void ReadMap(string filename)
+    {
+        string[] lines = File.ReadAllLines(filename);
+        mapWidth = lines.Length;
+        mapHeight = lines[0].Length;
+        map = new char[mapWidth, mapHeight];
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                map[i, j] = lines[i][j];
+            }
+        }
+    }
+
+    private void InitializePlayer()
+    {
+        playerX = 1;
+        playerY = 1;
+
+        while (map[playerY, playerX] == '#')
+        {
+            playerX++;
+            if (playerX >= mapHeight)
+            {
+                playerX = 1;
+                playerY++;
+            }
+        }
+    }
 
     public static void RunGame(char direction)
     {
@@ -47,7 +71,7 @@ public class Game
                     break;
                 default:
                     continue;
-            } 
+            }
         }
     }
 
@@ -69,6 +93,28 @@ public class Game
 
                 return;
             }
+        }
+    }
+
+    public void Start()
+    {
+        DrawMap();
+
+        Console.SetCursorPosition(playerX, playerY);
+        Console.Write('@');
+    }
+
+    public void DrawMap()
+    {
+        Console.Clear();
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                Console.Write(map[y, x]);
+            }
+
+            Console.WriteLine();
         }
     }
 }
