@@ -49,8 +49,8 @@ public class Tests
             Assert.Multiple(() =>
             {
                 Assert.That(game.IsValidPosition(1, 1), Is.True);
-                Assert.That(game.IsValidPosition(0, 0), Is.False); 
-                Assert.That(game.IsValidPosition(-1, 1), Is.False); 
+                Assert.That(game.IsValidPosition(0, 0), Is.False);
+                Assert.That(game.IsValidPosition(-1, 1), Is.False);
                 Assert.That(game.IsValidPosition(5, 2), Is.False);
             });
         }
