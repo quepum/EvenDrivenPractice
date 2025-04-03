@@ -1,119 +1,120 @@
+// <copyright file="Game.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
 namespace MiniGame;
 
+/// <summary>
+/// Implementation of game logic.
+/// </summary>
 public class Game
 {
-    private static char[,] map;
-    private static int playerX, playerY;
-    private static int mapWidth, mapHeight;
-    
-    public Game(string filePath) {
-        ReadMap(filePath);
-        FindPlayerPosition();
-    }
-    
-      /// <summary>
-      /// Read.
-      /// </summary>
-      /// <param name="filename">Name of file.</param>
-      /// <returns>Array element of maze.</returns>
-    public char[][] ReadMap(string filename)
-      {
-            string[] line = File.ReadAllLines(filename);
-            char[][] maze = new char[line.Length][];
-            for (int i = 0; i < line.Length; ++i)
-            {
-                  maze[i] = line[i].ToCharArray();
-            }
+    private char[,] map;
+    private int playerX;
+    private int playerY;
+    private int width;
+    private int height;
 
-            return maze;
-      }
-
-    public void RunGame(char direction)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Game"/> class.
+    /// </summary>
+    /// <param name="mapFilePath">Input file path.</param>
+    public Game(string mapFilePath)
     {
-        Console.Clear();
-
-        while (true)
-        {
-            int oldX = playerX, oldY = playerY;
-
-            switch (direction)
-            {
-                case 'U':
-                    if (playerX > 0 && map[playerY - 1, playerX] != '#')
-                    {
-                        playerY--;
-                    }
-                    break;
-
-                case 'D':
-                    if (playerX < mapWidth - 1 && map[playerY + 1, playerX] != '#')
-                    {
-                        playerY++;
-                    }
-                    break;
-
-                case 'L':
-                    if (playerX > 0 && map[playerY, playerX - 1] != '#')
-                    {
-                        playerX--;
-                    }
-                    break;
-
-                case 'R':
-                    if (playerX < mapHeight - 1 && map[playerY, playerX + 1] != '#')
-                    {
-                        playerX++;
-                    }
-                    break;
-            }
-            Console.SetCursorPosition(oldX, oldY);
-            Console.Write(map[oldY, oldX]);
-            
-            Console.SetCursorPosition(playerX, playerY);
-            Console.Write('@');
-        }
+        this.ReadMap(mapFilePath);
+        this.playerX = 1;
+        this.playerY = 1;
     }
 
-    static void FindPlayerPosition()
-    {
-        for (int y = 0; y < mapHeight; y++)
-        {
-            for (int x = 0; x < mapWidth; x++)
-            {
-                if (map[x, y] == '@')
-                {
-                    playerX = x;
-                    playerY = y;
-                    return;
-                }
-
-                playerX = 1;
-                playerY = 1;
-
-                return;
-            }
-        }
-    }
-
+    /// <summary>
+    /// Start game.
+    /// </summary>
     public void Start()
     {
-        DrawMap();
+        this.DrawMap();
+        this.PlacePlayer();
 
-        Console.SetCursorPosition(playerX, playerY);
-        Console.Write('@');
+        EventLoop.Run(key =>
+        {
+            int newX = this.playerX;
+            int newY = this.playerY;
+
+            switch (key)
+            {
+                case ConsoleKey.UpArrow: newY--; break; // Вверх
+                case ConsoleKey.DownArrow: newY++; break; // Вниз
+                case ConsoleKey.LeftArrow: newX--; break; // Влево
+                case ConsoleKey.RightArrow: newX++; break;
+            }
+
+            if (this.IsValidPosition(newX, newY))
+            {
+                this.ClearPlayer();
+                this.playerX = newX;
+                this.playerY = newY;
+                this.PlacePlayer();
+            }
+        });
     }
 
-    public void DrawMap()
+    /// <summary>
+    /// Return current map.
+    /// </summary>
+    /// <returns>Map.</returns>
+    public char[,] GetMap() => this.map;
+
+    /// <summary>
+    /// Checks whether the specified position is acceptable for the player to move.
+    /// </summary>
+    /// <param name="x">The first coordinate of the position.</param>
+    /// <param name="y">The second coordinate of the position.</param>
+    /// <returns><c>true</c> if the position is within the map and is not a wall ('#').
+    /// Otherwise, returns <c>false</c>.</returns>
+    public bool IsValidPosition(int x, int y)
     {
+        return x >= 0 && x < this.width && y >= 0 && y < this.height && this.map[y, x] != '#';
+    }
+
+    private void DrawMap()
+    {
+        Console.WriteLine();
         Console.Clear();
-        for (int y = 0; y < mapHeight; y++)
+        for (int y = 0; y < this.height; y++)
         {
-            for (int x = 0; x < mapWidth; x++)
+            for (int x = 0; x < this.width; x++)
             {
-                Console.Write(map[y, x]);
+                Console.Write(this.map[y, x]);
             }
 
             Console.WriteLine();
+        }
+    }
+
+    private void PlacePlayer()
+    {
+        Console.SetCursorPosition(this.playerX, this.playerY);
+        Console.Write('@');
+    }
+
+    private void ClearPlayer()
+    {
+        Console.SetCursorPosition(this.playerX, this.playerY);
+        Console.Write(' ');
+    }
+
+    private void ReadMap(string filePath)
+    {
+        string[] lines = File.ReadAllLines(filePath);
+        this.height = lines.Length;
+        this.width = lines[0].Length;
+
+        this.map = new char[this.height, this.width];
+        for (int y = 0; y < this.height; y++)
+        {
+            for (int x = 0; x < this.width; x++)
+            {
+                this.map[y, x] = lines[y][x];
+            }
         }
     }
 }

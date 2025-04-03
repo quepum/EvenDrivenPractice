@@ -1,36 +1,29 @@
-﻿namespace MiniGame;
+﻿// <copyright file="EventLoop.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
-public class EventLoop
+namespace MiniGame;
+
+/// <summary>
+/// Handling keystrokes in a console application.
+/// </summary>
+public static class EventLoop
 {
-    private readonly Game game;
-
-    public EventLoop(Game game)
-    {
-        this.game = game;
-    }
-
-    public void Run()
+    /// <summary>
+    /// Processing keystrokes.
+    /// </summary>
+    /// <param name="onKeyPress">The pressed key.</param>
+    public static void Run(Action<ConsoleKey> onKeyPress)
     {
         while (true)
         {
-            var key = Console.ReadKey();
-            switch (key.Key)
+            var key = Console.ReadKey(intercept: true);
+            if (key.Key == ConsoleKey.Escape)
             {
-                case ConsoleKey.LeftArrow:
-                    this.game.RunGame('L');
-                    break;
-                case ConsoleKey.RightArrow:
-                    this.game.RunGame('R');
-                    break;
-                case ConsoleKey.UpArrow:
-                    this.game.RunGame('U');
-                    break;
-                case ConsoleKey.DownArrow:
-                    this.game.RunGame('D');
-                    break;
-                case ConsoleKey.Escape:
-                    return;
+                break;
             }
+
+            onKeyPress(key.Key);
         }
     }
 }
