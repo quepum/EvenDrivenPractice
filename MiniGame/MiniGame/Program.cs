@@ -6,8 +6,8 @@ using MiniGame;
 
 try
 {
-    const string filePath = @"C:\Users\Алина\RiderProjects\EvenDrivenPractice\MiniGame\MiniGame\file.txt";
-    var game = new Game(filePath);
+    const string filename = @"C:\Users\peche\source\repos\EvenDrivenPractice\MiniGame\MiniGame\file.txt";
+    var game = new Game(filename);
     game.Start();
 }
 catch (FileNotFoundException ex)

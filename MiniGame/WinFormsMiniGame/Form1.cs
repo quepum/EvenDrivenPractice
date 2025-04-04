@@ -8,6 +8,8 @@ public partial class Form1 : Form
     private float cellSize;
     private Bitmap shrekImage;
     
+    private int moveSpeed = 1;
+
     public Form1(string filePath)
     {
         InitializeComponent();
@@ -20,6 +22,12 @@ public partial class Form1 : Form
         this.KeyDown += GameForm_KeyDown;
         this.KeyPreview = true;
         this.Resize += GameForm_Resize;
+
+        button4.Click += (s, e) => MovePlayer(ConsoleKey.UpArrow);
+        button1.Click += (s, e) => MovePlayer(ConsoleKey.LeftArrow);
+        button2.Click += (s, e) => MovePlayer(ConsoleKey.DownArrow);
+        button3.Click += (s, e) => MovePlayer(ConsoleKey.RightArrow);
+
         CalculateCellSize();
     }
 
@@ -61,7 +69,7 @@ public partial class Form1 : Form
 
         var playerRect = new Rectangle((int)(playerX * cellSize), (int)(playerY * cellSize), (int)cellSize,
             (int)cellSize);
-        g.DrawImage(shrekImage, playerRect);
+        g.FillEllipse(Brushes.Blue, playerRect);
     }
 
     private void MovePlayer(ConsoleKey key)
