@@ -6,6 +6,7 @@ public partial class Form1 : Form
     private int playerX;
     private int playerY;
     private float cellSize;
+    private int moveSpeed = 1;
 
     public Form1(string filePath)
     {
@@ -16,6 +17,11 @@ public partial class Form1 : Form
         this.KeyDown += GameForm_KeyDown;
         this.KeyPreview = true;
         this.Resize += GameForm_Resize;
+
+        button4.Click += (s, e) => MovePlayer(ConsoleKey.UpArrow);
+        button1.Click += (s, e) => MovePlayer(ConsoleKey.LeftArrow);
+        button2.Click += (s, e) => MovePlayer(ConsoleKey.DownArrow);
+        button3.Click += (s, e) => MovePlayer(ConsoleKey.RightArrow);
 
         CalculateCellSize();
     }

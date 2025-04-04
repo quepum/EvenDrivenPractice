@@ -90,9 +90,11 @@ public class Game
         }
     }
 
+    private int x = 0;
+    private int y = 0;
     private void PlacePlayer()
     {
-        Console.SetCursorPosition(this.playerX, this.playerY);
+        Console.SetCursorPosition(this.playerX - x, this.playerY - y);
         Console.Write('@');
     }
 
