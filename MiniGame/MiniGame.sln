@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniGame", "MiniGame\MiniGa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniGame.Tests", "MiniGame.Tests\MiniGame.Tests.csproj", "{D46AE19A-004F-4989-924E-E40B0722CC63}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsMiniGame", "WinFormsMiniGame\WinFormsMiniGame.csproj", "{46EC69CB-2340-466E-8221-24A8B5C284AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{D46AE19A-004F-4989-924E-E40B0722CC63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D46AE19A-004F-4989-924E-E40B0722CC63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D46AE19A-004F-4989-924E-E40B0722CC63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46EC69CB-2340-466E-8221-24A8B5C284AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46EC69CB-2340-466E-8221-24A8B5C284AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46EC69CB-2340-466E-8221-24A8B5C284AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46EC69CB-2340-466E-8221-24A8B5C284AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
