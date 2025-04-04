@@ -67,9 +67,9 @@ public partial class Form1 : Form
             }
         }
 
-        var playerRect = new Rectangle((int)(playerX * cellSize), (int)(playerY * cellSize), (int)cellSize,
+        var playerRect = new Rectangle((int)(playerX * cellSize), (int)(playerY * cellSize ), (int)cellSize,
             (int)cellSize);
-        g.FillEllipse(Brushes.Blue, playerRect);
+        g.DrawImage(shrekImage, playerRect);
     }
 
     private void MovePlayer(ConsoleKey key)
