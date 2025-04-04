@@ -6,17 +6,20 @@ public partial class Form1 : Form
     private int playerX;
     private int playerY;
     private float cellSize;
-
+    private Bitmap shrekImage;
+    
     public Form1(string filePath)
     {
         InitializeComponent();
         ReadMap(filePath);
         playerX = 1;
         playerY = 1;
+        
+        shrekImage = new Bitmap(@"C:\Users\ASUS\RiderProjects\EvenDrivenPractice\MiniGame\WinFormsMiniGame\20.png");
+        
         this.KeyDown += GameForm_KeyDown;
         this.KeyPreview = true;
         this.Resize += GameForm_Resize;
-
         CalculateCellSize();
     }
 
@@ -58,7 +61,7 @@ public partial class Form1 : Form
 
         var playerRect = new Rectangle((int)(playerX * cellSize), (int)(playerY * cellSize), (int)cellSize,
             (int)cellSize);
-        g.FillEllipse(Brushes.Blue, playerRect);
+        g.DrawImage(shrekImage, playerRect);
     }
 
     private void MovePlayer(ConsoleKey key)
