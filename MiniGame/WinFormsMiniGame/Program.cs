@@ -8,7 +8,8 @@ static class Program
     [STAThread]
     static void Main()
     {
+        string inputFilePath = @"C:\Users\Алина\RiderProjects\EvenDrivenPractice\MiniGame\WinFormsMiniGame\map.txt";
         ApplicationConfiguration.Initialize();
-        Application.Run(new Form1());
+        Application.Run(new Form1(inputFilePath));
     }
 }
